@@ -52,7 +52,7 @@ def verify_password(username, password):
 @auth.login_required
 def mpv_open_url():
     url = request.form.get('url', type=str)
-    if not re.fullmatch(r'https://(www\.youtube\.com/watch\?v=|youtu.be/)[0-9a-zA-Z-_]{,16}', url):
+    if not re.fullmatch(r'https://((www|m)\.youtube\.com/watch\?v=|youtu.be/)[0-9a-zA-Z-_]{,16}', url):
         abort(400)
     print('{}: {} ({}) has requested {}'.format(request.host, auth.current_user(), request.remote_addr, url))
     print('Running "{}"'.format(' '.join([config['MPV_BIN_PATH'], url] + config['MPV_EXTRA_ARGS'])))
